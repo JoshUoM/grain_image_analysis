@@ -51,10 +51,11 @@ def grain_list(image_file,pix_len,sca_len):
     # append array with each grain's area and equivalent diameter (i.e., the diameter assuming the grain face is a 2d circle)
     areas, eqdia = [], []
     for prop in clusters:
-        area = prop.area*conv
-        areas.append(round(area,2))
-        dia = ((4*prop.area*conv)/np.pi)**(1/2)
-        eqdia.append(round(dia,2))
+        if prop.area > 1:
+            area = prop.area*(conv**2)
+            areas.append(round(area,2))
+            dia = ((4*prop.area*(conv**2))/np.pi)**(1/2)
+            eqdia.append(round(dia,2))
         
     mean = sumProduct(eqdia,areas)/sum(areas) # calculate area-weighted mean for equivalent circle diameter of grains
     std = (sumProduct([(val - mean)**2 for val in eqdia],areas)/((sum(areas)*(len(areas)-1))/(len(areas))))**(1/2) # calc std of area-weighted mean
