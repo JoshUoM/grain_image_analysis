@@ -1,2 +1,2 @@
-# grain_image_analysis
-Python code for analysing grain sizes from an image.
+# Grain Image Analysis
+Python code for analysing grain sizes from a binary image.
